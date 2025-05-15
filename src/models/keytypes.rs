@@ -1,5 +1,5 @@
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub struct NumericKey<K> {
+pub struct IntegerKey<K> {
     pub id: K,
 }
 

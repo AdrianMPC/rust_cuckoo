@@ -22,6 +22,4 @@ impl<T: Keyed + Eq + Copy> CuckooHashTable<T> {
         let key = item.key_for_second_hash();
         generic_hash(&*key, self.capacity)
     }
-
-
 }
