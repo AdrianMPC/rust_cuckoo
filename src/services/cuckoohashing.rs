@@ -1,4 +1,5 @@
 use crate::utils::generic_hash;
+use crate::models::response::ResponseLayout;
 use std::ops::Mul;
 
 pub struct CuckooHashTable<T> {
@@ -21,5 +22,39 @@ impl<T: Keyed + Eq + Copy> CuckooHashTable<T> {
     fn second_hash(&self, item: &T) -> usize {
         let key = item.key_for_second_hash();
         generic_hash(&*key, self.capacity)
+    }
+
+    fn get_table_size(&self){
+        return self.table.len();
+    }
+
+    fn check_existence(&self, id:usize) -> bool {
+        let index_pos1 : usize = first_hash(&id);
+
+        if self.table[index_pos1].id == id {
+            return true;
+        }
+
+        let index_pos2 = : usize = second_hash(&id);
+        if self.table[index_pos2].id == id {
+            return true;
+        }
+
+        return false; 
+    }
+
+    fn find_data(&self, id:usize) -> &ResponseLayout {
+        let index_pos1 : usize = first_hash(&id);
+
+        if self.table[index_pos1].id == id {
+            return self.table[index_pos1];
+        }
+
+        let index_pos2 = : usize = second_hash(&id);
+        if self.table[index_pos2].id == id {
+            return self.table[index_pos2];
+        }
+
+        return None; 
     }
 }
